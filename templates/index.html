@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block Content %}
+	{% for p in posts %}
+		{% if p.is_active %}
+		<article class="article">
+			<div class="article-top">
+			 	<h2><a href="{{p.slug}}">{{ p }}</a></h2>
+			 	<span class="date">{{p.date}}</span>
+		 	</div>
+		 	<div class="article-area index">
+		 		<div class="cover-image">
+		 			<a href="{{p.slug}}">
+						<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
+						<noscript>
+						<img src="{{MEDIA_URL}}{{ p.image }}" />
+						</noscript>
+		 			</a>
+		 		</div>
+			 	<p>{{ p.description }}</p>
+			 	<div class="read-more-btn">
+			 		<a href="{{p.slug}}">Devamını Oku</a>
+			 	</div>
+		 	</div>
+		 </article>
+		{% else %}
+			{% if user.is_authenticated %}
+			<article class="article">
+				<div class="article-top">
+				 	<h2><a href="{{p.slug}}">{{ p }}</a></h2>
+				 	<span class="date">{{p.date}}</span>
+			 	</div>
+			 	<div class="article-area index">
+			 		<div class="cover-image">
+			 			<a href="{{p.slug}}">
+						<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
+						<noscript>
+						<img src="{{MEDIA_URL}}{{ p.image }}" />
+						</noscript>
+			 			</a>
+			 		</div>
+				 	<p>{{ p.description }}</p>
+				 	<div class="read-more-btn">
+				 		<a href="{{p.slug}}">Devamını Oku</a>
+				 	</div>
+			 	</div>
+			 </article>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+
+{% endblock %}

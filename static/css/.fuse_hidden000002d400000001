@@ -1,0 +1,29 @@
+* 		{margin: 0; padding: 0;}
+
+/*		Fonts		*/
+@font-face {font-family: 'font100';src: url('../fonts/font100.eot');src: url('../fonts/font100.eot?#iefix') format('embedded-opentype'),url('../fonts/font100.svg#museo_sans_100regular') format('svg'),url('../fonts/font100.woff') format('woff'),url('../fonts/font100.ttf') format('truetype');font-weight: normal;font-style: normal;}
+@font-face {font-family: 'font300';src: url('../fonts/font300.eot');src: url('../fonts/font300.eot?#iefix') format('embedded-opentype'),url('../fonts/font300.svg#museo_sans_300regular') format('svg'),url('../fonts/font300.woff') format('woff'),url('../fonts/font300.ttf') format('truetype');font-weight: normal;font-style: normal;}
+@font-face {font-family: 'font500';src: url('../fonts/font500.eot');src: url('../fonts/font500.eot?#iefix') format('embedded-opentype'),url('../fonts/font500.svg#museo_sans_500regular') format('svg'),url('../fonts/font500.woff') format('woff'),url('../fonts/font500.ttf') format('truetype');font-weight: normal;font-style: normal;}
+@font-face {font-family: 'font500';font-weight:bold;src: url('../fonts/font700.eot');src: url('../fonts/font700.eot?#iefix') format('embedded-opentype'),url('../fonts/font700.svg#museo_sans_700regular') format('svg'),url('../fonts/font700.woff') format('woff'),url('../fonts/font700.ttf') format('truetype');font-style: normal;}
+
+body 	{font-family: 'font300', arial,sans-serif; font-size: 18px; color: #555555;}
+a 		{text-decoration: none;}
+
+#container 	{width: 940px; margin: 0 auto;}
+#logo 		{margin: 20px 0 40px;}
+#logo span 	{font-size: 14px; color: #333333; display: block; margin-top: 8px; margin-left: 2px;}
+
+.article 			{margin: 20px 0 40px;}
+.article-top h3 a 	{font-size: 24px; color: #555555; font-family: 'font500',sans-serif; font-weight: bold;}
+.article-top .date 	{font-size: 14px; font-family: 'font100',sans-serif; display: block; margin: 4px 0 14px;}
+
+.article-area p 			{font-family: 'font300', arial,sans-serif!important; line-height: 22px!important;}
+.article-area .cover-image 	{margin-bottom: 20px;}
+.article-area.index .cover-image 	{height: 150px; overflow: hidden;}
+
+.read-more-btn a 		{color: #555; font-family: 'font500',sans-serif; font-weight: bold; margin-top: 10px; display: block;}
+.read-more-btn a:first-child 		{font-weight: normal; font-size: 16px;}
+
+.share-facebook 		{color: #555; display: block; font-weight: bold;}
+
+footer 		{height: 80px;}

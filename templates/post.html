@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block Title %}{{post.title}} | Yazayım Dedim{% endblock %}
+{% block TitleSocial %}{{post.title}} | Yazayım Dedim{% endblock %}
+{% block TitleSocial2 %}{{post.title}} | Yazayım Dedim{% endblock %}
+{% block Description %}{{post.description}}{% endblock %}
+{% block DescriptionSocial %}{{post.description}}{% endblock %}
+{% block DescriptionSocial2 %}{{post.description}}{% endblock %}
+{% block Keywords %}{{post.keywords}}{% endblock %}
+{% block CoverImage %}http://yazayimdedim.com/uploads/{{ post.image }}{% endblock%}
+{% block CoverImage2 %}http://yazayimdedim.com/uploads/{{ post.image }}{% endblock%}
+{% block Url%}{{post.slug}}{% endblock %}
+{% block UrlSocial%}{{post.slug}}{% endblock %}
+
+{% block Content %}
+<div id="main">
+	<article class="article">
+		<div class="article-top">
+		 	<h2><a>{{ post.title }}</a></h2>
+		 	<span class="date">{{post.date}}</span>
+		 	<strong style="margin-bottom:20px; float:left; font-size: 16px; color: #555;">{{post.description}}</strong>
+	 	</div>
+	 	<div class="article-area">
+	 		<div class="cover-image">
+					<img class="lazy-load" data-src="{{MEDIA_URL}}{{ post.image }}" data-src-mobile="{{MEDIA_URL}}{{ post.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
+					<noscript>
+					<img src="{{MEDIA_URL}}{{ post.image }}" />
+					</noscript>
+	 		</div>
+		 	{{ post.text|safe }}
+		 	<div class="social-share">
+		 	<a class="share-btn facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436'); return false;">
+		 		<span class="share-text">Facebook'ta Paylaş!</span>
+		 		<span id="fbsr" class="share-count fbShareCount">0</span>
+		 		<div class="kucukibo"></div>
+		 	</a>
+		 	<a class="share-btn twitter" onclick="javascript:(function(){window.twttr=window.twttr||{};var D=550,A=450,C=screen.height,B=screen.width,H=Math.round((B/2)-(D/2)),G=0,F=document,E;if(C&gt;A){G=Math.round((C/2)-(A/2))}window.twttr.shareWin=window.open('http://twitter.com/share','','left='+H+',top='+G+',width='+D+',height='+A+',personalbar=0,toolbar=0,scrollbars=1,resizable=1');E=F.createElement('script');E.src='http://platform.twitter.com/bookmarklets/share.js?v=1';F.getElementsByTagName('head')[0].appendChild(E)}());">		 		
+		 		<span class="share-text">Twitter'da Paylaş!</span>
+		 		<span class="share-count">0</span>
+		 	</a>
+		 	</div>
+	 	</div>
+	 </article>
+</div>
+<div id="sidebar">
+	<div id="last-posts">
+		<h4>Bunlarda Olma mı?</h4>
+		{% for p in posts %}
+			<div class="post-item">
+			 	<h3><a href="/{{p.slug}}">{{ p }}</a></h3>
+			 	<span class="date">{{p.date}}</span>
+			 	<a href="/{{p.slug}}">
+					<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
+					<noscript>
+					<img src="{{MEDIA_URL}}{{ p.image }}" />
+					</noscript>
+			 	</a>
+		 	</div>
+		{% endfor %}
+	</div>
+</div>
+<div id="post-bottom">
+	    <div id="disqus_thread"></div>
+	    <script type="text/javascript">
+	        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	        var disqus_shortname = 'yazayimdedim'; // required: replace example with your forum shortname
+
+	        /* * * DON'T EDIT BELOW THIS LINE * * */
+	        (function() {
+	            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	        })();
+	    </script>
+	    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script type="text/javascript">
+var fburl = "http://graph.facebook.com/?id=http://yazayimdedim.com/{{post.slug}}"
+
+function callAjax(url, callback){
+    var xmlhttp;
+    // compatible with IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+            callback(xmlhttp.responseText);
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
+
+callAjax(fburl, function(data) {
+    var d = JSON.parse(data);
+    var fbShareCount = d["shares"];
+    var counter = document.getElementById("fbsr");
+	counter.innerHTML = fbShareCount;
+
+})
+
+//var twurl = "http://urls.api.twitter.com/1/urls/count.json?url=yazayimdedim.com/{{post.slug}}"
+//console.log(twurl);
+//callAjax(twurl, function(data) {
+//    var td = JSON.parse(data);
+//    console.log(td);
+//
+//})
+</script>
+</div>
+
+
+{% endblock %}

@@ -2,3 +2,9 @@
 *.pot
 *.pyc
 local_settings.py
+uploads/*
+*.db
+.DS_Store
+.idea/*
+
+ *yazayimdedim/wsgi.py

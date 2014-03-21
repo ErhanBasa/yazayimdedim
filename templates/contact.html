@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block Content %}
+<form id="contact-form" action="" method="POST">{% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+        <div{% if message.tags %} class="success"{% endif %}>Tamamdır, bende!</div>
+        {% endfor %}
+    {% endif %}
+	<ul>
+		<li class="half">
+			<label for="id_name">Oo kimler teşrif etmiş efendim.. Bu kısım <span>zorunlu değil</span> sallamaya gerek yok ama kimle görüştüğümüzü bilsek hoş olur tabi.</label>
+			{{form.name}}
+		</li>
+		<li class="half{% if form.mail.errors %} error{% endif %}">
+			<label for="id_mail">Şaşırtıcı ama bu kısımda <span>zorunlu değil</span>, eğer cevap atmamız gerekirse kime gönderelim diye, merak etmeyin spamci değiliz efendim.</label>
+			{{form.mail}}
+		</li>
+		<li>
+			<label for="id_subject">Tahmin etmişsinizdir ama bu kısımda <span>zorunlu değil</span>, evet böyle özgürlüklerle dolu bir iletişim formu yaptık. Yapmayaydıkta gönülsüz insanlar ismini <span>“hede hödö”</span> mail adresini <span>“asdasfas@asdasdacd.com”</span> mu yapsın efendim. </label>
+			{{form.subject}}
+		</li>
+		<li{% if form.message.errors %} class="error"{% endif %}>
+			<label for="id_message">Burasıda <span>zorunlu</span> olsun artık, zorunlu yapmayalımda boş boş gönderin formu de mi? Evet efendim her türlü öneri, bilgi, istek gibi konulara açığız dilediğinizce doldurabilirsiniz. Kendi formunuz gibi doldurun.</label>
+			{{form.message}}
+		</li>
+	</ul>
+	<button>VER ODUNU SALİH USTA</button>
+</form>
+{% endblock %}
