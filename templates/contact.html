@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 
-{% block Content %}
+{% block ExtraCSS %}
+#cover 	{margin: 40px 0 20px; text-align:left; width:100%;}
+#cover .read-more 	{width: 100%; background:transparent; font-weight:normal;}
+#contact-form 	{overrflow:hidden;}
+#contact-form li 	{width:100%; float:left; }
+#contact-form .description 	{font-size:16px; display:block; line-height:18px;}
+#contact-form .description span 	{font-weight:bold; color:#fff;}
+#contact-form li input 	{width:100%; height:40px; border-radius:5px; border:0; opacity:.8; text-indent:10px; font-size:20px; margin-bottom:5px;}
+#contact-form li textarea 	{width:100%; border-radius:5px; border:0; opacity:.8; text-indent:10px; font-size:20px; margin-bottom:10px; padding:15px 0;}
+#contact-form li.half 	{width:48%;}
+#contact-form li.half:first-child 	{margin-right:4%;}
+{% endblock %}
+
+{% block Cover %}
+<h2><a>İLETİŞİM</a></h2>
+
 <form id="contact-form" action="" method="POST">{% csrf_token %}
     {% if messages %}
         {% for message in messages %}
@@ -9,22 +24,29 @@
     {% endif %}
 	<ul>
 		<li class="half">
-			<label for="id_name">Oo kimler teşrif etmiş efendim.. Bu kısım <span>zorunlu değil</span> sallamaya gerek yok ama kimle görüştüğümüzü bilsek hoş olur tabi.</label>
+			<label for="id_name" class="description">Oo kimler teşrif etmiş efendim.. Bu kısım <span>zorunlu değil</span> sallamaya gerek yok ama kimle görüştüğümüzü bilsek hoş olur tabi.</label>
 			{{form.name}}
 		</li>
 		<li class="half{% if form.mail.errors %} error{% endif %}">
-			<label for="id_mail">Şaşırtıcı ama bu kısımda <span>zorunlu değil</span>, eğer cevap atmamız gerekirse kime gönderelim diye, merak etmeyin spamci değiliz efendim.</label>
+			<label for="id_mail" class="description">Şaşırtıcı ama bu kısımda <span>zorunlu değil</span>, eğer cevap atmamız gerekirse kime gönderelim diye, merak etmeyin spamci değiliz efendim.</label>
 			{{form.mail}}
 		</li>
 		<li>
-			<label for="id_subject">Tahmin etmişsinizdir ama bu kısımda <span>zorunlu değil</span>, evet böyle özgürlüklerle dolu bir iletişim formu yaptık. Yapmayaydıkta gönülsüz insanlar ismini <span>“hede hödö”</span> mail adresini <span>“asdasfas@asdasdacd.com”</span> mu yapsın efendim. </label>
+			<label for="id_subject" class="description">Tahmin etmişsinizdir ama bu kısımda <span>zorunlu değil</span>, evet böyle özgürlüklerle dolu bir iletişim formu yaptık. Yapmayaydıkta gönülsüz insanlar ismini <span>“hede hödö”</span> mail adresini <span>“asdasfas@asdasdacd.com”</span> mu yapsın efendim. </label>
 			{{form.subject}}
 		</li>
 		<li{% if form.message.errors %} class="error"{% endif %}>
-			<label for="id_message">Burasıda <span>zorunlu</span> olsun artık, zorunlu yapmayalımda boş boş gönderin formu de mi? Evet efendim her türlü öneri, bilgi, istek gibi konulara açığız dilediğinizce doldurabilirsiniz. Kendi formunuz gibi doldurun.</label>
+			<label for="id_message" class="description">Burasıda <span>zorunlu</span> olsun artık, zorunlu yapmayalımda boş boş gönderin formu de mi? Evet efendim her türlü öneri, bilgi, istek gibi konulara açığız dilediğinizce doldurabilirsiniz. Kendi formunuz gibi doldurun.</label>
 			{{form.message}}
 		</li>
 	</ul>
-	<button>VER ODUNU SALİH USTA</button>
+	<button class="read-more mt10">VER ODUNU SALİH USTA</button>
 </form>
+
 {% endblock %}
+
+{% block PageCoverImage %}
+background-image: url(http://yazayimdedim.com/uploads/post/daktilo.jpg)
+{% endblock %}
+
+

@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from blog.models import Tag, Category, Post
-from django.shortcuts import render,get_object_or_404
+from blog.models import Tag, Category, Post, Profile
+from django.shortcuts import render,get_object_or_404, redirect
 from django.contrib.syndication.views import Feed
-from blog.forms import ContactForm
+from blog.forms import ContactForm, RegisterationForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login as login_func
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 
 def articles(request, template = 'index.html'):
 	tags = Tag.objects.all().order_by('name')
@@ -23,7 +26,7 @@ def article(request, slug, template = 'post.html'):
 	categories = Category.objects.all().order_by('name')
 	tags = Tag.objects.all().order_by('name')
 	post = get_object_or_404(Post, slug=slug)
-	posts = Post.objects.all().exclude(pk=post.pk).order_by('?')[:6]
+	posts = Post.objects.all().exclude(pk=post.pk).order_by('?')[:3]
 	category = post.category.all()
 	tag = post.tag.all()
 
@@ -72,10 +75,49 @@ def contact(request, template="contact.html"):
             if form.is_valid():
                     form.save()
                     messages.add_message(request, messages.SUCCESS, u'Tamamdır')
-                    form=ContactForm()
+                    redirect('contact')
     else:
             form=ContactForm()
     ctx = {
             'form' : form,
     }
     return render(request,template,ctx)
+
+def profile(request, slug,template="profile.html"):
+	profile = get_object_or_404(Profile, user__username=slug)
+	posts = Post.objects.filter(user=profile.user)
+
+	ctx = {
+		'profile' : profile,
+		'posts' : posts,
+	}
+
+	return render(request,template,ctx)
+
+
+def login(request, template="login.html"):
+	if request.method == 'POST':
+		if request.POST['type'] == 'register':
+			register_form = RegisterationForm(request.POST)
+			if register_form.is_valid():
+				user = register_form.save(commit=False)
+				user.email = register_form.cleaned_data.get('email')
+				user.save()
+				profile = Profile.objects.create(user=user)
+				login_func(request, user)
+				redirect('login')
+		else:
+			login_form = AuthenticationForm(data=request.POST)
+			if login_form.is_valid():
+				login_func(request, login_form.get_user())
+				redirect('login')
+	else:
+		register_form = RegisterationForm()
+		login_form = AuthenticationForm()
+
+	ctx = {
+		'register_form' : register_form,
+		'login_form': login_form,
+	}
+
+	return render(request,template,ctx)

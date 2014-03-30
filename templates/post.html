@@ -12,21 +12,37 @@
 {% block Url%}{{post.slug}}{% endblock %}
 {% block UrlSocial%}{{post.slug}}{% endblock %}
 
+{% block Cover %}
+{% for p in posts|slice:":1" %}
+<p class="date-user"><strong>{{post.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
+<h2><a>{{post}}</a></h2>
+<p class="description">{{ post.description }}</p>
+
+<div class="share-infos">
+	<strong><i class="icon facebook"></i> <span class="fbShareCount">0</span> kez paylaşıldı</strong>
+	<strong><i class="icon twitter"></i> 3421 kez tweetlendi</strong>
+</div>
+{% endfor %}
+
+<script type="text/javascript">
+
+var url = 'http://graph.facebook.com/?id=http://yazayimdedim.com/{{post.slug}}';
+
+$.getJSON(url,function(data){
+	var shareCount = data['shares'];
+	$('.fbShareCount').empty();
+	$('.fbShareCount').append(shareCount);
+});
+
+</script>
+{% endblock %}
+
+{% block PageCoverImage %}background-image: url(http://yazayimdedim.com/{{MEDIA_URL}}{{ post.image }}){% endblock %}
+
 {% block Content %}
 <div id="main">
 	<article class="article">
-		<div class="article-top">
-		 	<h2><a>{{ post.title }}</a></h2>
-		 	<span class="date">{{post.date}}</span>
-		 	<strong style="margin-bottom:20px; float:left; font-size: 16px; color: #555;">{{post.description}}</strong>
-	 	</div>
 	 	<div class="article-area">
-	 		<div class="cover-image">
-					<img class="lazy-load" data-src="{{MEDIA_URL}}{{ post.image }}" data-src-mobile="{{MEDIA_URL}}{{ post.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
-					<noscript>
-					<img src="{{MEDIA_URL}}{{ post.image }}" />
-					</noscript>
-	 		</div>
 		 	{{ post.text|safe }}
 		 	<div class="social-share">
 		 	<a class="share-btn facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436'); return false;">
@@ -42,23 +58,7 @@
 	 	</div>
 	 </article>
 </div>
-<div id="sidebar">
-	<div id="last-posts">
-		<h4>Bunlarda Olma mı?</h4>
-		{% for p in posts %}
-			<div class="post-item">
-			 	<h3><a href="/{{p.slug}}">{{ p }}</a></h3>
-			 	<span class="date">{{p.date}}</span>
-			 	<a href="/{{p.slug}}">
-					<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
-					<noscript>
-					<img src="{{MEDIA_URL}}{{ p.image }}" />
-					</noscript>
-			 	</a>
-		 	</div>
-		{% endfor %}
-	</div>
-</div>
+
 <div id="post-bottom">
 	    <div id="disqus_thread"></div>
 	    <script type="text/javascript">
@@ -74,41 +74,23 @@
 	    </script>
 	    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 	    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-<script type="text/javascript">
-var fburl = "http://graph.facebook.com/?id=http://yazayimdedim.com/{{post.slug}}"
-
-function callAjax(url, callback){
-    var xmlhttp;
-    // compatible with IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function(){
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-            callback(xmlhttp.responseText);
-        }
-    }
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-}
-
-
-callAjax(fburl, function(data) {
-    var d = JSON.parse(data);
-    var fbShareCount = d["shares"];
-    var counter = document.getElementById("fbsr");
-	counter.innerHTML = fbShareCount;
-
-})
-
-//var twurl = "http://urls.api.twitter.com/1/urls/count.json?url=yazayimdedim.com/{{post.slug}}"
-//console.log(twurl);
-//callAjax(twurl, function(data) {
-//    var td = JSON.parse(data);
-//    console.log(td);
-//
-//})
-</script>
 </div>
 
+<div id="otherposts">
+	{% for p in posts %}
+		<div class="post-item">
+			<div class="postarea">
+			 	<h3><a href="/{{p.slug}}">{{ p }}</a></h3>
+			 	<p class="description"><a href="/{{p.slug}}">{{ p.description }}</a></p>
+		 	</div>
+		 	<a class="postbg" href="/{{p.slug}}">
+				<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
+				<noscript>
+				<img src="{{MEDIA_URL}}{{ p.image }}" />
+				</noscript>
+		 	</a>
+	 	</div>
+	{% endfor %}
+</div>
 
 {% endblock %}

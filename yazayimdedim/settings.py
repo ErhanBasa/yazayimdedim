@@ -96,6 +96,8 @@ ROOT_URLCONF = 'yazayimdedim.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'yazayimdedim.wsgi.application'
 
+AUTH_PROFILE_MODULE = "blog.Profile"
+
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )

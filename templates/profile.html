@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block Cover %}
+
+<p class="date-user"><strong>{{profile.user.date_joined|date:"d F Y"}}</strong> tarihinde <strong><a href="#">{{p.user.username}}</a></strong> aramıza yazar olarak katılmış.</p>
+<h2><a>{{ profile.user.username}}</a></h2>
+<p class="description">{{profile.about}}</p>
+
+<div class="share-infos">
+	<strong><i class="icon facebook"></i> {{profile.facebook_url}}</strong>
+	<strong><i class="icon twitter"></i> {{profile.twitter_url}}</strong>
+</div>
+
+{% endblock %}
+
+{% block PageCoverImage %}
+
+  background-image: url({{MEDIA_URL}}{{ profile.profile_picture }})
+
+{% endblock %}
+
+{% block Content %}
+<div id="index-loop">
+	{% for p in posts %}
+		{% if p.is_active %}
+		<article class="article">
+			<div class="article-area">
+			 	<h3><a href="{{p.slug}}">{{ p }}</a></h3>
+				<p class="date"><strong>{{p.date}}</strong> tarihinde <strong><a href="#">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
+			 	<p class="description">{{ p.description }}</p>
+			 	<div class="read-more-btn">
+			 		<a href="{{p.slug}}">Devamını Oku</a>
+			 	</div>
+		 	</div>
+		 	<div class="article-image">
+	 			<a href="{{p.slug}}">
+					<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
+					<noscript>
+					<img src="{{MEDIA_URL}}{{ p.image }}" />
+					</noscript>
+	 			</a>
+		 	</div>
+		 </article>
+		{% endif %}
+	{% endfor %}
+</div>
+{% endblock %}

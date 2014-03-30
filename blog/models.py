@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from datetime import datetime
 
@@ -44,6 +45,7 @@ class Post(models.Model):
 	tag = models.ManyToManyField(Tag, null = True, blank = True)
 	category = models.ManyToManyField(Category, null = True, blank = True)
 	is_active = models.BooleanField(default=True)
+	user = models.ForeignKey(User)
 
 	def __unicode__(self):
 		return u'%s'%self.title
@@ -62,3 +64,11 @@ class Contact(models.Model):
 	subject = models.CharField(u"Konu Neydi?", max_length = 255, null = True, blank = True)
 	message = models.TextField(u"Mesajınız..")
 	date = models.DateTimeField(u"Tarih", default = datetime.now())
+
+class Profile(models.Model):
+
+	profile_picture = models.ImageField(u"Profil Resmi", upload_to="profile", null = True, blank = True)
+	about = models.TextField(u"Hakkında", null = True, blank = True)
+	user = models.ForeignKey(User)
+	facebook_url = models.CharField(u"Facebook Linki", max_length = 100, null = True, blank = True)
+	twitter_url = models.CharField(u"Twitter Linki", max_length = 100, null = True, blank = True)
