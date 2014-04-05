@@ -5,6 +5,7 @@ a, button 	{text-decoration: none; color: #444444; -webkit-transition:all .25s e
 html,body 	{width: 100%; height: 100%;}
 img 		{border: 0; max-width: 100%;}
 input:focus 		{opacity: 1;}
+iframe 		{max-width: 100%;}
 
 @font-face {font-family: 'fontnormal'; src: url('../fonts/fontnormal.eot'); src: url('../fonts/fontnormal.svg#proxima_nova_rgregular') format('svg'), url('../fonts/fontnormal.eot?#iefix') format('embedded-opentype'),url('../fonts/fontnormal.woff') format('woff'),url('../fonts/fontnormal.ttf') format('truetype'); font-weight: normal; font-style: normal; }
 @font-face {font-family: 'fontnormal'; src: url('../fonts/fontbold.eot'); src: url('../fonts/fontbold.svg#proxima_novasemibold') format('svg'); src: url('../fonts/fontbold.eot?#iefix') format('embedded-opentype'),url('../fonts/fontbold.woff') format('woff'),url('../fonts/fontbold.ttf') format('truetype'); font-weight: bold; font-style: normal;}
@@ -67,6 +68,8 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 
 #main .article 			{width: 60%; padding: 50px 20%;} 
 #main .article p 		{margin: 20px 0; font-size: 20px; line-height: 30px;} 
+#main .article img 		{height: auto;}
+#post-bottom 			{width: 60%; margin: 20px auto;}
 
 .share-btn  		{background: #3b5998; cursor:pointer; color: #fff!important; display: block; font-weight: bold; margin-top:20px; margin-bottom: 20px; text-align: center; float: left; position: relative;}
 .share-btn.twitter  		{background: #3fa8f3; margin-left: 20px;}
@@ -129,6 +132,7 @@ to {margin-top: 53px;}
 @media (max-width: 940px) { 
 #index-loop .article .article-area,
 #index-loop .article .article-image 	{width: 100%;}
+#post-bottom 			{width: 80%;}
 
 #index-loop .article .article-image 	{margin-bottom: 20px;}
 
