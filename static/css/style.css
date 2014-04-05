@@ -68,7 +68,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 
 #main .article 			{width: 60%; padding: 50px 20%;} 
 #main .article p 		{margin: 20px 0; font-size: 20px; line-height: 30px;} 
-#main .article img 		{height: auto;}
+#main .article img 		{height: auto!important;}
 #post-bottom 			{width: 60%; margin: 20px auto;}
 
 .share-btn  		{background: #3b5998; cursor:pointer; color: #fff!important; display: block; font-weight: bold; margin-top:20px; margin-bottom: 20px; text-align: center; float: left; position: relative;}
