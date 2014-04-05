@@ -12,18 +12,7 @@
 {% block Url%}{{post.slug}}{% endblock %}
 {% block UrlSocial%}{{post.slug}}{% endblock %}
 
-{% block Cover %}
-{% for p in posts|slice:":1" %}
-<p class="date-user"><strong>{{post.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
-<h2><a>{{post}}</a></h2>
-<p class="description">{{ post.description }}</p>
-
-<div class="share-infos">
-	<strong><i class="icon facebook"></i> <span class="fbShareCount">0</span> kez paylaşıldı</strong>
-	<strong><i class="icon twitter"></i> 3421 kez tweetlendi</strong>
-</div>
-{% endfor %}
-
+{% block ExtraJS %}
 <script type="text/javascript">
 
 var url = 'http://graph.facebook.com/?id=http://yazayimdedim.com/{{post.slug}}';
@@ -34,7 +23,33 @@ $.getJSON(url,function(data){
 	$('.fbShareCount').append(shareCount);
 });
 
+$(document).ready(function(){
+	
+	var contentPosition = $('#content').offset();
+	var contentTop = contentPosition.top;
+
+	$('.down-page').click(function(){
+		$("html, body").animate({ scrollTop: contentTop });
+	});
+
+});
+
 </script>
+{% endblock %}
+
+{% block Cover %}
+{% for p in posts|slice:":1" %}
+<p class="date-user"><strong>{{post.date}}</strong> tarihinde <!--<strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından--> yazılmış.</p>
+<h2><a>{{post}}</a></h2>
+<p class="description">{{ post.description }}</p>
+
+<div class="share-infos">
+	<strong><i class="icon facebook"></i> <span class="fbShareCount">0</span> kez paylaşıldı</strong>
+	<!--<strong><i class="icon twitter"></i> 3421 kez tweetlendi</strong>-->
+</div>
+
+<div class="down-page"></div>
+{% endfor %}
 {% endblock %}
 
 {% block PageCoverImage %}background-image: url(http://yazayimdedim.com/{{MEDIA_URL}}{{ post.image }}){% endblock %}

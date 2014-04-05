@@ -4,6 +4,7 @@ li 			{list-style: none;}
 a, button 	{text-decoration: none; color: #444444; -webkit-transition:all .25s ease-in;-moz-transition:all .25s ease-in;-o-transition:all .25s ease-in;transition:all .25s ease-in; cursor: pointer;}
 html,body 	{width: 100%; height: 100%;}
 img 		{border: 0; max-width: 100%;}
+input:focus 		{opacity: 1;}
 
 @font-face {font-family: 'fontnormal'; src: url('../fonts/fontnormal.eot'); src: url('../fonts/fontnormal.svg#proxima_nova_rgregular') format('svg'), url('../fonts/fontnormal.eot?#iefix') format('embedded-opentype'),url('../fonts/fontnormal.woff') format('woff'),url('../fonts/fontnormal.ttf') format('truetype'); font-weight: normal; font-style: normal; }
 @font-face {font-family: 'fontnormal'; src: url('../fonts/fontbold.eot'); src: url('../fonts/fontbold.svg#proxima_novasemibold') format('svg'); src: url('../fonts/fontbold.eot?#iefix') format('embedded-opentype'),url('../fonts/fontbold.woff') format('woff'),url('../fonts/fontbold.ttf') format('truetype'); font-weight: bold; font-style: normal;}
@@ -11,6 +12,8 @@ img 		{border: 0; max-width: 100%;}
 @media screen and (-webkit-min-device-pixel-ratio:0) {
  	@font-face {font-family: 'fontnormal'; src: url('../fonts/fontbold.svg#proxima_novasemibold') format('svg'); font-weight: bold; font-style: normal;}
 }
+
+.mt10 		{margin-top: 10px;}
 
 body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #eee;}
 
@@ -47,11 +50,15 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 #cover .read-more 	{color: #fff; color: rgba(255,255,255,.7); font-weight: bold; font-size: 14px; padding: 10px; border: 2px solid rgba(255,255,255,.7); border-radius: 5px; display: block; width: 150px; margin: 20px auto; }
 #cover .read-more:hover 	{color: #555; border: 2px solid #fff; background: #fff;}
 #cover .share-infos 	{color: rgba(255,255,255,.7); font-size: 14px;}
+#cover .share-infos strong 	{display: inline-block; margin: 0 10px;}
+#cover .share-infos a 	{color: rgba(255,255,255,.7);}
+#cover .share-infos a:hover 	{color: rgba(255,255,255,1);}
+#cover .share-infos i 	{}
 
 #index-loop .article 		{padding: 50px 10%; background: url(../img/post-sep.png) repeat-x bottom left; overflow: hidden;}
 #index-loop .article .article-area 		{width: 55%; padding-right: 5%; float: left;}
 #index-loop .article .date 				{color: #777; font-size: 14px; margin: 10px 0;}
-#index-loop .article .article-image 	{width: 40%; float: left;}
+#index-loop .article .article-image 	{width: 40%; float: right;}
 #index-loop .article .article-image a 	{background: #fff; padding: 10px; display: block; padding-bottom: 4px;}
 #index-loop .article h3 a 				{color: #222; font-size: 30px;}
 #index-loop .article .description 		{color: #444; font-size: 18px; margin-bottom: 10px;}
@@ -93,4 +100,52 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 #otherposts .post-item p a 	{color: #fff; display: block; font-size: 16px;}
 #otherposts .post-item h3, #otherposts .post-item p 	{width: 70%; padding: 0 15%;}
 
-.mt10 		{margin-top: 10px;}
+/*		Contact Form		*/
+.form-container 	{width:80%; margin:15px 10% 40px; }
+#contact-form ul li	{width:100%; float:left; margin:12px 0;}
+#contact-form ul li.half	{width:46%;}
+#contact-form ul li.half input	{padding:5px 4%;}
+#contact-form ul li.half:first-child	{margin-right:6%;}
+#contact-form ul li input,
+#contact-form ul li textarea	{width:96%; height: 40px; border:1px solid #d9d7cd; border-radius:3px; font-size:14px; padding:5px 2%;}
+#contact-form ul li textarea	{padding:2%; text-indent:0; width:96%;}
+#contact-form ul li .description {color:#505050; font-size:14px; line-height:18px; display:block; margin-bottom:10px;}
+#contact-form .read-more 		{background:#85c855; width:100%; border:0; border-radius:5px; padding:5px 0; height:40px; color:#fff; font-family: 'fontnormal',sans-serif; font-weight:bold; font-size:18px; margin-top:0;}
+#contact-form .read-more:active 		{outline:none; margin-top:1px; box-shadow:inset 0 0 5px rgba(0,0,0,.5);}
+#contact-form .read-more:focus 		{outline:none;}
+
+.down-page 		{background: url('../img/down-arrow.png') no-repeat; width: 100px; height: 24px; margin: 50px auto 0; cursor: pointer; padding: 5px; -webkit-animation: downer 1s infinite; animation: downer 1s infinite; }
+
+@-webkit-keyframes downer{
+from {margin-top: 50px;}
+to {margin-top: 53px;}
+}
+
+@keyframes downer {
+from {margin-top: 50px;}
+to {margin-top: 53px;}
+}
+
+@media (max-width: 940px) { 
+#index-loop .article .article-area,
+#index-loop .article .article-image 	{width: 100%;}
+
+#index-loop .article .article-image 	{margin-bottom: 20px;}
+
+#main .article { width: 80%; padding: 50px 10%;}
+}
+
+@media (max-width: 720px) { 
+	#contact-form ul li.half,
+	#contact-form ul li 	{width: 100%;}
+}
+
+@media (max-width: 600px) { 
+	#cover h2 a {font-size: 30px;}
+	#cover .description 	{font-size: 20px;}
+	#otherposts .post-item 	{width: 100%;}
+	#otherposts .post-item p a { font-size: 14px;}
+	.share-btn 	{width: 100%; margin-bottom: 0;}
+	.share-btn.twitter 	{margin-left: 0;}
+
+}

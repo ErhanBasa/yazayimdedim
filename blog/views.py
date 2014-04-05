@@ -3,11 +3,10 @@
 from blog.models import Tag, Category, Post, Profile
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.syndication.views import Feed
-from blog.forms import ContactForm, RegisterationForm
+from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import login as login_func, authenticate, logout as logout_func
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
 
 
 def articles(request, template='index.html'):

@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 
+{% block ExtraJS %}
+<script type="text/javascript">
+	$(document).ready(function(){
+	
+	var contentPosition = $('#content').offset();
+	var contentTop = contentPosition.top;
+
+	$('.down-page').click(function(){
+		$("html, body").animate({ scrollTop: contentTop });
+	});
+
+	});
+</script>
+{% endblock %}
+
 {% block Cover %}
 
 <p class="date-user"><strong>{{profile.user.date_joined|date:"d F Y"}}</strong> tarihinde <strong><a href="#">{{p.user.username}}</a></strong> aramıza yazar olarak katılmış.</p>
@@ -7,9 +22,11 @@
 <p class="description">{{profile.about}}</p>
 
 <div class="share-infos">
-	<strong><i class="icon facebook"></i> {{profile.facebook_url}}</strong>
-	<strong><i class="icon twitter"></i> {{profile.twitter_url}}</strong>
+	<strong><i class="icon facebook"></i> <a href="https://facebook.com/{{profile.twitter_url}}" target="_blank">{{profile.facebook_url}}</a></strong>
+	<strong><i class="icon twitter"></i> <a href="https://twitter.com/{{profile.twitter_url}}" target="_blank">{{profile.twitter_url}}</a></strong>
 </div>
+
+<div class="down-page"></div>
 
 {% endblock %}
 
@@ -25,15 +42,15 @@
 		{% if p.is_active %}
 		<article class="article">
 			<div class="article-area">
-			 	<h3><a href="{{p.slug}}">{{ p }}</a></h3>
+			 	<h3><a href="/{{p.slug}}">{{ p }}</a></h3>
 				<p class="date"><strong>{{p.date}}</strong> tarihinde <strong><a href="#">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
 			 	<p class="description">{{ p.description }}</p>
 			 	<div class="read-more-btn">
-			 		<a href="{{p.slug}}">Devamını Oku</a>
+			 		<a href="/{{p.slug}}">Devamını Oku</a>
 			 	</div>
 		 	</div>
 		 	<div class="article-image">
-	 			<a href="{{p.slug}}">
+	 			<a href="/{{p.slug}}">
 					<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
 					<noscript>
 					<img src="{{MEDIA_URL}}{{ p.image }}" />

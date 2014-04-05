@@ -1,40 +1,46 @@
 {% extends "base.html" %}
 
 {% block ExtraCSS %}
-#cover 	{margin: 40px 0 20px; text-align:left; width:100%;}
-#cover .read-more 	{width: 100%; background:transparent; font-weight:normal;  float:left; display:block;}
-#contact-form 	{overrflow:hidden; width:50%; float:left;}
-#contact-form.login 	{float:right; width:45%;}
-#contact-form li 	{width:100%; float:left; }
-#contact-form .description 	{font-size:16px; display:block; line-height:18px;}
-#contact-form .description span 	{font-weight:bold; color:#fff;}
-#contact-form li input 	{width:100%; height:40px; border-radius:5px; border:0; opacity:.8; text-indent:10px; font-size:20px; margin-bottom:5px;}
-#contact-form li textarea 	{width:100%; border-radius:5px; border:0; opacity:.8; text-indent:10px; font-size:20px; margin-bottom:10px; padding:15px 0;}
-#contact-form li.half 	{width:48%;}
-#contact-form li.half:first-child 	{margin-right:4%;}
+#showcase 		{height:300px;}
+#cover 			{margin:50px 10% 20px;}
+
+#contact-form 	{float:left; width:45%; }
+#contact-form h3 	{margin-top:15px;}
+#contact-form .minitext 	{font-size:16px; color:#666; margin-top:5px; margin-bottom:12px;}
+#contact-form.login 	{float:right; text-align:right; margin-right:2px;}
+#contact-form ul li 	{margin: 5px 0;}
+#contact-form .read-more 	{margin-top:8px;}
+.form-container 	{overflow:hidden;}
 {% endblock %}
 
 {% block Cover %}
-<h2><a>BENDE YAZAYIM</a></h2>
+<h2><a>BENDE İSTEREM</a></h2>
+<p class="description">Eğer üyeyseniz giriş yapabilirsiniz, yok hayır değilim derseniz kayıt formu aşağıda mevcuttur efendim.</p>
+{% endblock %}
+
+{% block PageCoverImage %}
+background-image: url(http://yazayimdedim.com/uploads/post/daktilo.jpg)
+{% endblock %}
+
+
+{% block Content %}
+<div class="form-container">
 
 <form id="contact-form" action="" method="POST">{% csrf_token %}
 <h3>Kayıt Ol!</h3>
+<p class="minitext">Üyeliğim yok haccciiii diyorsan:</p>
 <input type="hidden" name="type" value="register">
 	<ul>
 		<li>
-			<label for="id_username" class="description">Kullanıcı adı :</label>
 			{{register_form.username}}
 		</li>
 		<li>
-			<label for="id_password1" class="description">Şifre :</label>
 			{{register_form.password1}}
 		</li>
 		<li>
-			<label for="id_password2" class="description">Şifre (Tekrar) :</label>
 			{{register_form.password2}}
 		</li>
 		<li>
-			<label for="id_email" class="description">E-Mail Adresiniz :</label>
 			{{register_form.email}}
 		</li>
 	</ul>
@@ -43,24 +49,19 @@
 
 <form id="contact-form" class="login" action="" method="POST">{% csrf_token %}
 <h3>Giriş Yap!</h3>
+<p class="minitext">Çalıştım attım hesabı kenara diyorsan:</p>
 <input type="hidden" name="type" value="login">
 <ul>
 		<li>
-			<label for="id_username" class="description">Kullanıcı adı :</label>
 			{{login_form.username}}
 		</li>
 		<li>
-			<label for="id_password1" class="description">Şifre :</label>
 			{{login_form.password}}
 		</li>
 		</ul>
 	
-	<button class="read-more">Giriş Yap</button>
+	<button class="read-more">GİRİŞ YAP</button>
 </form>
 
-
-{% endblock %}
-
-{% block PageCoverImage %}
-background-image: url(http://yazayimdedim.com/uploads/post/daktilo.jpg)
+</div>
 {% endblock %}
