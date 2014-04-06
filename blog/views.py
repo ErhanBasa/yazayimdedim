@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from blog.models import Tag, Category, Post, Profile
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.syndication.views import Feed
-from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth import login as login_func, authenticate, logout as logout_func
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.syndication.views import Feed
+from blog.models import Tag, Category, Post, Profile
+from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm, ProfileForm
+from blog.utils import get_count
 
 
 def articles(request, template='index.html'):
@@ -22,7 +23,6 @@ def articles(request, template='index.html'):
 
     return render(request, template, ctx)
 
-
 def article(request, slug, template='post.html'):
     categories = Category.objects.all().order_by('name')
     tags = Tag.objects.all().order_by('name')
@@ -30,18 +30,17 @@ def article(request, slug, template='post.html'):
     posts = Post.objects.all().exclude(pk=post.pk).order_by('?')[:3]
     category = post.category.all()
     tag = post.tag.all()
-
-    ctx = {
+    uri = request.build_absolute_uri()
+    return render(request, template, {
+        'facebook_count': get_count('facebook', uri),
+        'twitter_count': get_count('twitter', uri),
         'categories': categories,
         'category': category,
         'posts': posts,
         'post': post,
         'tags': tags,
         'tag': tag,
-    }
-
-    return render(request, template, ctx)
-
+    })
 
 def sitemap(request, template="sitemap.html"):
     posts = Post.objects.all().order_by('-date')

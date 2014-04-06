@@ -102,7 +102,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 .share-btn.twitter  		{background: #3fa8f3; margin-left: 20px;}
 
 .share-btn .share-text 	{width: 205px; display: block; float: left; text-align: center; line-height: 40px; font-size: 18px;}
-.share-btn .share-count 	{padding: 0 10px; height: 41px; display: none; float: right; line-height: 40px; background: #253c8e; }
+.share-btn .share-count 	{padding: 0 10px; height: 41px; float: right; line-height: 40px; background: #253c8e; }
 .share-btn.twitter .share-count 	{background: #3874b9;}
 #fbsr 				{display: block; }
 

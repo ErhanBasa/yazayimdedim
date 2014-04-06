@@ -93,6 +93,18 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'yazayimdedim.urls'
 
+# API links to social networking sites.
+APIS = {
+    'twitter': {
+        'url': 'http://cdn.api.twitter.com/1/urls/count.json?url=',
+        'key': 'count'
+    },
+    'facebook': {
+        'url': 'http://graph.facebook.com/?id=',
+        'key': 'shares'
+    }
+}
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'yazayimdedim.wsgi.application'
 
