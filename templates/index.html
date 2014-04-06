@@ -3,14 +3,6 @@
 {% block ExtraJS %}
 <script type="text/javascript">
 
-	var url = 'http://graph.facebook.com/?id=http://yazayimdedim.com/{{p.slug}}';
-
-	$.getJSON(url,function(data){
-		var shareCount = data['shares'];
-		$('.fbShareCount').empty();
-		$('.fbShareCount').append(shareCount);
-	});
-
 	$(document).ready(function(){
 	
 	var contentPosition = $('#content').offset();
@@ -37,10 +29,17 @@
 	<strong><i class="icon facebook"></i> <span class="fbShareCount">0</span> kez paylaşıldı</strong>
 	<!--<strong><i class="icon twitter"></i> 3421 kez tweetlendi</strong>-->
 </div>
+<script type="text/javascript">
+	var url = 'http://graph.facebook.com/?id=http://yazayimdedim.com/{{p.slug}}';
 
-<div class="down-page"></div>
-
+	$.getJSON(url,function(data){
+		var shareCount = data['shares'];
+		$('.fbShareCount').empty();
+		$('.fbShareCount').append(shareCount);
+	});
+</script>
 {% endfor %}
+<div class="down-page"></div>
 
 {% endblock %}
 
