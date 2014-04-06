@@ -3,7 +3,7 @@
 from blog.models import Tag, Category, Post, Profile
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.syndication.views import Feed
-from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm
+from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth import login as login_func, authenticate, logout as logout_func
 from django.contrib.auth.decorators import login_required
@@ -87,12 +87,24 @@ def contact(request, template="contact.html"):
 
 
 def profile(request, slug, template="profile.html"):
-    profile = get_object_or_404(Profile, user__username=slug)
+    profile = get_object_or_404(Profile, user__username__iexact=slug)
     posts = Post.objects.filter(user=profile.user)
+    is_editable = request.user == profile.user
+
+    if request.method == 'POST':
+        profileform = ProfileForm(instance=profile, data=request.POST, files=request.FILES)
+        if profileform.is_valid():
+            profileform.save()
+            return redirect('profile', slug)
+    else:
+        profileform = ProfileForm(instance=profile)
+
 
     ctx = {
         'profile': profile,
         'posts': posts,
+        'profileform': profileform,
+        'is_editable': is_editable
     }
 
     return render(request, template, ctx)

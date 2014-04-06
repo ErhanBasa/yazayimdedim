@@ -24,5 +24,5 @@ urlpatterns = patterns('',
         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     url(r'^sitemap.xml', sitemap),
     url(r'^latest/feed/$', LatestArticlesFeed()),
-    url(r'^yazar/(?P<slug>[\w.@+-]+)/$', profile),
+    url(r'^yazar/(?P<slug>[\w.@+-]+)/$', profile, name='profile'),
 )

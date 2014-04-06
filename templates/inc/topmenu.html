@@ -1,5 +1,17 @@
 <ul id="topmenu">
-	<!--<li><a href="/giris/">BENDE YAZAYIM</a></li>
-	<li><a href="#">KİMLER VARMIŞ</a></li>-->
+{% if user.is_authenticated %}
+	<li class="dd-cnt">
+		<a href="#" class="dd-button">{{user}} <i class="down-icon"></i><i class="up-icon"></i></a>
+		<ul class="dropdown-menu">
+			<li><a href="#">Yazı Ekle</a></li>
+			<li><a href="/yazar/{{user}}/">Profilin</a></li>
+			<li><a href="#">Profil Düzenleme</a></li>
+			<li><a href="/cikis/">Çıkış</a></li>
+		</ul>
+	</li>
+{% else %}
+	<li><a href="/giris/">BENDE YAZAYIM</a></li>
+{% endif %}
+	<li><a href="#">KİMLER VARMIŞ</a></li>
 	<li><a href="/iletisim/">İLETİŞİM</a></li>
 </ul>

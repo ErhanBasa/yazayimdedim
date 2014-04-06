@@ -7,10 +7,17 @@
 #contact-form 	{float:left; width:45%; }
 #contact-form h3 	{margin-top:15px;}
 #contact-form .minitext 	{font-size:16px; color:#666; margin-top:5px; margin-bottom:12px;}
-#contact-form.login 	{float:right; text-align:right; margin-right:2px;}
+#contact-form.login 	{float:right; text-align:left; margin-right:2px;}
 #contact-form ul li 	{margin: 5px 0;}
 #contact-form .read-more 	{margin-top:8px;}
 .form-container 	{overflow:hidden;}
+
+@media (max-width: 720px) {
+#contact-form 	{width:98%; float:left;}
+#contact-form.login 	{ margin-right:0px; float:left;}
+}
+	
+}
 {% endblock %}
 
 {% block Cover %}
@@ -26,10 +33,41 @@ background-image: url(http://yazayimdedim.com/uploads/post/daktilo.jpg)
 {% block Content %}
 <div class="form-container">
 
+<form id="contact-form" class="login" action="" method="POST">{% csrf_token %}
+<h3>Giriş Yap!</h3>
+<p class="minitext">Çalıştım attım hesabı kenara diyorsan:</p>
+<input type="hidden" name="type" value="login">
+	{% if login_form.errors %}
+		<div class="form-errors">
+		{% for error in login_form.errors.values %}
+			{{error}}
+		{% endfor %}
+		</div>
+	{% endif %}
+		<ul>
+		<li>
+			{{login_form.username}}
+		</li>
+		<li>
+			{{login_form.password}}
+		</li>
+		</ul>
+	
+	<button class="read-more">GİRİŞ YAP</button>
+</form>
+
 <form id="contact-form" action="" method="POST">{% csrf_token %}
 <h3>Kayıt Ol!</h3>
 <p class="minitext">Üyeliğim yok haccciiii diyorsan:</p>
 <input type="hidden" name="type" value="register">
+	{% if register_form.errors %}
+	<div class="form-errors">
+		{{register_form.username.errors}}
+		{{register_form.password1.errors}}
+		{{register_form.password2.errors}}
+		{{register_form.email.errors}}
+	</div>
+	{% endif %}
 	<ul>
 		<li>
 			{{register_form.username}}
@@ -47,21 +85,6 @@ background-image: url(http://yazayimdedim.com/uploads/post/daktilo.jpg)
 	<button class="read-more">KAYIT OL</button>
 </form>
 
-<form id="contact-form" class="login" action="" method="POST">{% csrf_token %}
-<h3>Giriş Yap!</h3>
-<p class="minitext">Çalıştım attım hesabı kenara diyorsan:</p>
-<input type="hidden" name="type" value="login">
-<ul>
-		<li>
-			{{login_form.username}}
-		</li>
-		<li>
-			{{login_form.password}}
-		</li>
-		</ul>
-	
-	<button class="read-more">GİRİŞ YAP</button>
-</form>
 
 </div>
 {% endblock %}
