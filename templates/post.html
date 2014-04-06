@@ -18,7 +18,7 @@
 var url = 'http://graph.facebook.com/?id=http://yazayimdedim.com/{{post.slug}}';
 
 $.getJSON(url,function(data){
-	var shareCount = data['shares'];
+	var shareCount = data['shares'] || 0;
 	$('.fbShareCount').empty();
 	$('.fbShareCount').append(shareCount);
 });
