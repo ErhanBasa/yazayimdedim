@@ -67,11 +67,17 @@
 <div class="originalprofile">
 <p class="date-user"><strong>{{profile.user.date_joined|date:"d F Y"}}</strong> tarihinde <strong><a href="#">{{p.user.username}}</a></strong> aramıza yazar olarak katılmış.</p>
 <h2><a>{{ profile.user.username}}</a>{% if is_editable %}<span id="editform-activer">Profil Düzenle</span>{% endif %}</h2>
+{% if profile.about %}
 <p class="description">{{profile.about}}</p>
+{% endif %}
 
 <div class="share-infos">
+	{% if profile.facebook_url %}
 	<strong><i class="icon facebook"></i> <a href="https://facebook.com/{{profile.twitter_url}}" target="_blank">{{profile.facebook_url}}</a></strong>
+	{% endif %}
+	{% if profile.twitter_url %}
 	<strong><i class="icon twitter"></i> <a href="https://twitter.com/{{profile.twitter_url}}" target="_blank">{{profile.twitter_url}}</a></strong>
+	{% endif %}
 </div>
 <div class="down-page"></div>
 </div>
