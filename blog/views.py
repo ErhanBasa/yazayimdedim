@@ -5,6 +5,7 @@ from django.contrib.auth import login as login_func, authenticate, logout as log
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.syndication.views import Feed
+from django.core.urlresolvers import reverse
 from blog.models import Tag, Category, Post, Profile
 from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm, ProfileForm
 from blog.utils import get_count
@@ -14,14 +15,16 @@ def articles(request, template='index.html'):
     tags = Tag.objects.all().order_by('name')
     categories = Category.objects.all().order_by('name')
     posts = Post.objects.all().order_by('-date')
-
-    ctx = {
+    last_post = posts.get()
+    last_post_uri = request.build_absolute_uri(reverse('detail', args=(last_post.slug, )))
+    return render(request, template, {
         'tags': tags,
         'categories': categories,
         'posts': posts,
-    }
-
-    return render(request, template, ctx)
+        'last_post': last_post,
+        'last_post_facebook_count': get_count('facebook', last_post_uri),
+        'last_post_twitter_count': get_count('twitter', last_post_uri)
+    })
 
 def article(request, slug, template='post.html'):
     categories = Category.objects.all().order_by('name')
