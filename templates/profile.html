@@ -1,15 +1,44 @@
 {% extends "base.html" %}
 
+{% block Title %}{{ profile.user.username}} | Yazayım Dedim{% endblock %}
+{% block TitleSocial %}{{ profile.user.username}} | Yazayım Dedim{% endblock %}
+{% block TitleSocial2 %}{{ profile.user.username}} | Yazayım Dedim{% endblock %}
+{% block Description %}{{profile.about}}{% endblock %}
+{% block DescriptionSocial %}{{profile.about}}{% endblock %}
+{% block DescriptionSocial2 %}{{profile.about}}{% endblock %}
+{% block Keywords %}yazar {{ profile.user.username}}, {{ profile.user.username}}, yazayimdedim yazar{% endblock %}
+{% block CoverImage %}http://yazayimdedim.com{{MEDIA_URL}}{{ profile.profile_picture }}{% endblock%}
+{% block CoverImage2 %}http://yazayimdedim.com{{MEDIA_URL}}{{ profile.profile_picture }}{% endblock%}
+{% block Url%}http://yazayimdedim.com/yazar/{{ profile.user.username}}/{% endblock %}
+{% block UrlSocial%}http://yazayimdedim.com/yazar/{{ profile.user.username}}/{% endblock %}
+
 {% block ExtraJS %}
 <script type="text/javascript">
 	$(document).ready(function(){
 	
-	var contentPosition = $('#content').offset();
-	var contentTop = contentPosition.top;
+		var contentPosition = $('#content').offset();
+		var contentTop = contentPosition.top;
 
-	$('.down-page').click(function(){
-		$("html, body").animate({ scrollTop: contentTop });
-	});
+		$('.down-page').click(function(){
+			$("html, body").animate({ scrollTop: contentTop });
+		});
+
+		function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();            
+	            reader.onload = function (e) {
+	                var fileUrl = e.target.result;
+	                $('.cover-image').css('background-image','url('+ fileUrl +')');
+
+	            }
+	            
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+
+		$("#id_profile_picture").change(function(){
+			readURL(this);
+    	});
 
 	});
 </script>
