@@ -15,7 +15,7 @@ def articles(request, template='index.html'):
     tags = Tag.objects.all().order_by('name')
     categories = Category.objects.all().order_by('name')
     posts = Post.objects.all().order_by('-date')
-    last_post = posts.get()
+    last_post = posts.order_by('-id')[0]
     last_post_uri = request.build_absolute_uri(reverse('detail', args=(last_post.slug, )))
     return render(request, template, {
         'tags': tags,
