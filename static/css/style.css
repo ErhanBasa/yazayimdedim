@@ -150,6 +150,17 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 .down-page 		{background: url('../img/down-arrow.png') no-repeat; width: 100px; height: 24px; margin: 50px auto 0; cursor: pointer; padding: 5px; -webkit-animation: downer 1s infinite; animation: downer 1s infinite; }
 .down-page2 	{background: url('../img/down-arrow2.png') no-repeat; width: 54px; height: 43px; margin: 50px auto 0; cursor: pointer; padding: 5px; -webkit-animation: downer 1s infinite; animation: downer 1s infinite; }
 
+#contact-form ul .agreement input 	{float: left; width: auto;}
+.agreement  	{position: relative;}
+.agreement span 	{float: left; margin-top: 10px; margin-left: 10px; font-size: 20px;}
+.agreement span strong 	{cursor: pointer;}
+.agreement .behzatc 	{background: url('../img/behzatc.png') no-repeat; width: 271px; height: 203px; position: absolute; top: -194px; left: 55px; display: none;}
+.show-agreement 	{}
+
+.agreement .overlay 	{width: 100%; height: 100%; position: fixed; background: rgba(0,0,0,.5); top: 0px; left: 0; z-index: 1000; display: none;}
+.agreement .show-agreement 	{width: 60%; margin:10% 20%; border-radius: 10px; background: #fff; padding: 20px 40px; overflow-y: scroll; height: 60%;}
+.agreement .show-agreement p 	{margin: 10px 0;}
+
 
 
 @-webkit-keyframes downer{

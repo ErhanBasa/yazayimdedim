@@ -1,5 +1,22 @@
 {% extends "base.html" %}
 
+{% block ExtraJS %}
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.agreement span strong').on('click',function(){
+		$(this).parent().parent().find('.overlay').fadeIn();
+	});
+	$('.agreement .overlay').click(function(){
+		$(this).hide();
+	});
+	$('.agreement span strong').hover(function(){
+		$(this).parent().parent().find('.behzatc').show();
+	}, function(){
+		$(this).parent().parent().find('.behzatc').hide();
+	});
+});
+</script>
+{% endblock %}
 {% block ExtraCSS %}
 #showcase 		{height:300px;}
 #cover 			{margin:50px 10% 20px;}
@@ -81,10 +98,25 @@ background-image: url(http://yazayimdedim.com/uploads/post/daktilo.jpg)
 		<li>
 			{{register_form.email}}
 		</li>
+		<li class="agreement">
+			<input type="checkbox">
+			<span><strong>Üyelik sözleşmesini</strong> kabul ediyorum.</span>
+			<div class="behzatc"></div>
+			<div class="overlay">
+			<div class="show-agreement">
+				<h3>Kullanıcı sözleşmesi</h3>
+				<p>Siteye üye olmak için geçerli bir e-mail adresi gereklidir, Üyenin belirtmiş olduğu email adresi site yönetimi tarafından üyeye ait olarak kabul edilecektir. Mail adresinin yanlış olmasından doğabilecek sorunlar üyeye aittir.</p>
+				<p>Üye Türk Ceza Kanunu’nun, Fikir ve Sanat Eserleri Kanunu, Marka ve Patent Haklarının Korunması ile ilgili kanunlara uymayı taahhüt eder ve doğabilecek her türlü sorumluluk üyeye aittir.</p>
+				<p>Üye yazmış olduğu yazı, resim, haber ve videoların içeriklerinden kanunlar önünde sorumludur. Üye pornografi, müstehcenlik, ırkçılık, kişi ve gruplara karşı hakaret, tehdit, taciz ve kişilik haklarına saldırıda bulunacak paylaşım, resim, yorum, video ve haberlerde bulunamaz. Paylaşımlar da kullanılan yazı, video, resim ve diğer materyallerin kullanımında ilgili kişi ve ya kurumlardan izin almak üyeye aittir. Aksi takdir de doğabilecek tüm hukuki ve cezai durumlarda sorumluluk üyeye aittir.</p> 
+				<p>Paylaşılan haber, yazı, resim video ve diğer materyallerin yayınlanması veya yayından kaldırılması hakkı site yönetimindedir.</p>
+				<p>Üye hakkında yapılacak resmi soruşturma talebi veya suç duyurusu halinde üye ile ilgili istenen bilgiler resmi makamlara verilecektir.</p>
+				<p>İş bu sözleşmede dolayı meydana gelebilecek anlaşmazlıkların çözümünde İstanbul mahkemeleri yetkilidir.</p>
+				<p>Üye işbu sözleşmeyi dikkatle okumalı ve bilgileri doğru olarak doldurmalıdır. Üye sözleşmenin kabulünden sonra aykırı hareketlerde bulunmamayı taahhüt eder.</p>
+			</div>
+			</div>
+		</li>
 	</ul>
 	<button class="read-more">KAYIT OL</button>
 </form>
-
-
 </div>
 {% endblock %}
