@@ -21,6 +21,7 @@ class ContactForm(forms.ModelForm):
 
 class RegisterationForm(UserCreationForm):
     email = forms.EmailField(u"E-Posta Adresi")
+    check_agreement = forms.BooleanField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(RegisterationForm, self).__init__(*args, **kwargs)
@@ -41,6 +42,14 @@ class RegisterationForm(UserCreationForm):
             self.error_messages['duplicate_username'],
             code='duplicate_username',
         )
+
+    def clean_check_agreement(self):
+        check_agreement = self.cleaned_data["check_agreement"]
+        if check_agreement == False:
+            raise forms.ValidationError(
+                u"Lütfen üyelik sözleşmesini kabul ediniz."
+            )
+        return check_agreement
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

@@ -83,6 +83,7 @@ background-image: url(http://yazayimdedim.com/uploads/post/daktilo.jpg)
 		{{register_form.password1.errors}}
 		{{register_form.password2.errors}}
 		{{register_form.email.errors}}
+		{{register_form.check_agreement.errors}}
 	</div>
 	{% endif %}
 	<ul>
@@ -99,7 +100,7 @@ background-image: url(http://yazayimdedim.com/uploads/post/daktilo.jpg)
 			{{register_form.email}}
 		</li>
 		<li class="agreement">
-			<input type="checkbox">
+			{{register_form.check_agreement}}
 			<span><strong>Üyelik sözleşmesini</strong> kabul ediyorum.</span>
 			<div class="behzatc"></div>
 			<div class="overlay">
