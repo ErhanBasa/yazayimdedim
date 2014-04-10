@@ -26,7 +26,7 @@
 
 {% block Cover %}
 {% for p in posts|slice:":1" %}
-<p class="date-user"><strong>{{post.date}}</strong> tarihinde <!--<strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından--> yazılmış.</p>
+<p class="date-user"><strong>{{post.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
 <h2><a>{{post}}</a></h2>
 <p class="description">{{ post.description }}</p>
 

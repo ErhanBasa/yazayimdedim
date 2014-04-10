@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block Cover %}
-    <p class="date-user"><strong>{{last_post.date}}</strong> tarihinde <!--<strong><a href="/yazar/{{last_post.user.username}}/">{{last_post.user.username}}</a></strong> tarafından--> yazılmış.</p>
+    <p class="date-user"><strong>{{last_post.date}}</strong> tarihinde <strong><a href="/yazar/{{last_post.user.username}}/">{{last_post.user.username}}</a></strong> tarafından yazılmış.</p>
     <h2><a href="/{{last_post.slug}}">{{last_post}}</a></h2>
     <p class="description">{{ last_post.description }}</p>
     <a href="/{{last_post.slug}}" class="read-more">Hemen Oku</a>
@@ -45,7 +45,7 @@
 		 	</div>
 			<div class="article-area">
 			 	<h3><a href="{{p.slug}}">{{ p }}</a></h3>
-				<p class="date"><strong>{{p.date}}</strong> tarihinde <!-- <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından--> yazılmış.</p>
+				<p class="date"><strong>{{p.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
 			 	<p class="description">{{ p.description }}</p>
 			 	<div class="read-more-btn">
 			 		<a href="{{p.slug}}">Devamını Oku</a>
