@@ -2,8 +2,9 @@
 
 from django import forms
 from django.contrib.auth.models import User
-from blog.models import Contact, Profile
+from blog.models import Contact, Profile, Post
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from ckeditor.widgets import CKEditorWidget
 
 
 class ContactForm(forms.ModelForm):
@@ -45,17 +46,19 @@ class RegisterationForm(UserCreationForm):
 
     def clean_check_agreement(self):
         check_agreement = self.cleaned_data["check_agreement"]
-        if check_agreement == False:
+        if not check_agreement:
             raise forms.ValidationError(
                 u"Lütfen üyelik sözleşmesini kabul ediniz."
             )
         return check_agreement
+
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs = {"placeholder": u"KULLANICI ADI"}
         self.fields['password'].widget.attrs = {"placeholder": u"ŞİFRE"}
+
 
 class ProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -67,3 +70,13 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ('user',)
+
+
+class ArticleForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleForm, self).__init__(*args, **kwargs)
+        self.fields['text'].widget = CKEditorWidget()
+
+    class Meta:
+        model = Post

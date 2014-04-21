@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from blog.views import articles, article, sitemap, LatestArticlesFeed, contact, profile, login, logout
+from blog.views import articles, article, sitemap, LatestArticlesFeed, contact, profile, login, logout, create_post
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^giris/$', login, name='login'),
     url(r'^cikis/$', logout, name='logout'),
     url(r'^iletisim/$', contact, name='contact'),
+    url(r'^bendeyazayim/$', create_post, name='create_post'),
     url(r'^(?P<slug>[\w-]+)/$', article, name='detail'),
     url(r'^ckeditor/', include('ckeditor.urls')),
     url(r'^uploads/(?P<path>.*)$', 'django.views.static.serve',

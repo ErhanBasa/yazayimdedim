@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from blog.models import Tag, Category, Post, Profile
-from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm, ProfileForm
+from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm, ProfileForm, ArticleForm
 from blog.utils import get_count
 
 
@@ -15,16 +15,23 @@ def articles(request, template='index.html'):
     tags = Tag.objects.all().order_by('name')
     categories = Category.objects.all().order_by('name')
     posts = Post.objects.all().order_by('-date')
-    last_post = posts.order_by('-id')[0]
-    last_post_uri = request.build_absolute_uri(reverse('detail', args=(last_post.slug, )))
+    last_post = posts[0] if posts else None
+    if last_post:
+        last_post_uri = request.build_absolute_uri(reverse('detail', args=(last_post.slug, )))
+        last_post_facebook_count = get_count('facebook', last_post_uri)
+        last_post_twitter_count = get_count('twitter', last_post_uri)
+    else:
+        last_post_facebook_count = None
+        last_post_twitter_count = None
     return render(request, template, {
         'tags': tags,
         'categories': categories,
         'posts': posts,
         'last_post': last_post,
-        'last_post_facebook_count': get_count('facebook', last_post_uri),
-        'last_post_twitter_count': get_count('twitter', last_post_uri)
+        'last_post_facebook_count': last_post_facebook_count,
+        'last_post_twitter_count': last_post_twitter_count
     })
+
 
 def article(request, slug, template='post.html'):
     categories = Category.objects.all().order_by('name')
@@ -44,6 +51,7 @@ def article(request, slug, template='post.html'):
         'tags': tags,
         'tag': tag,
     })
+
 
 def sitemap(request, template="sitemap.html"):
     posts = Post.objects.all().order_by('-date')
@@ -101,7 +109,6 @@ def profile(request, slug, template="profile.html"):
     else:
         profileform = ProfileForm(instance=profile)
 
-
     ctx = {
         'profile': profile,
         'posts': posts,
@@ -146,3 +153,7 @@ def login(request, template="login.html"):
 def logout(request):
     logout_func(request)
     return redirect('home')
+
+
+def create_post(request, template="create_post.html"):
+    return render(request, template, {'form': ArticleForm()})
