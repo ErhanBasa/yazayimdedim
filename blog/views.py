@@ -170,3 +170,15 @@ def create_post(request, template="create_post.html"):
     else:
         form = ArticleForm()
     return render(request, template, {'form': form})
+
+
+def update_post(request, slug, template="create_post.html"):
+    post = get_object_or_404(Post.objects.filter(user=request.user), slug=slug)
+    if request.method == 'POST':
+        form = ArticleForm(instance=post, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ArticleForm(instance=post)
+    return render(request, template, {'form': form})    
