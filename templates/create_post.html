@@ -1,5 +1,52 @@
 {% extends "base.html" %}
 
-{% block Content %}
-	<form>{{ form.as_p }}</form>
+{% block ExtraCSS %}
+.inline-edit {display:block;}
+#id_image 	{display:none;}
+#cke_id_text 	{width:100%!important; margin-top:10%;}
+#id_title 	{font-size: 50px; color: #fff; background:transparent; border:0; text-align:center; width:100%; font-family: 'fontnormal',sans-serif; font-weight: bold;}
+#id_title:focus 	{outline:none;}
+#id_keywords 	{ width:100%; background: rgba(255,255,255,.15); font-size:18px; border:0; font-family:'fontnormal'; padding:10px; text-align:center; color:#fff;}
+#cover .inline-edit #imageupload {top:380px;}
+#cover .inline-edit .read-more {background: #85c855;}
 {% endblock %}
+
+{% block ExtraJS %}
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();            
+	            reader.onload = function (e) {
+	                var fileUrl = e.target.result;
+	                $('.cover-image').css('background-image','url('+ fileUrl +')');
+
+	            }
+	            
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+
+		$("#id_image").change(function(){
+			readURL(this);
+    	});
+
+	});
+</script>
+{% endblock %}
+
+{% block Cover %}
+<div class="inline-edit">
+<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+	<h2><a>{{ form.title }}</a></h2>
+	<p class="description">{{form.description }}</p>
+	<p class="description">{{form.keywords }}</p>
+	<label for="id_image" id="imageupload">Resim Yükle</label>
+	<input id="id_image" name="image" type="file">
+	{{ form.text }}
+	<button class="read-more">YAYINLA</button>
+</form>
+</div>
+{% endblock %}
+

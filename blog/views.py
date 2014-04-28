@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from datetime import date
 from django.contrib import messages
 from django.contrib.auth import login as login_func, authenticate, logout as logout_func
 from django.contrib.auth.decorators import login_required
@@ -150,10 +150,23 @@ def login(request, template="login.html"):
     return render(request, template, ctx)
 
 
+@login_required
 def logout(request):
     logout_func(request)
     return redirect('home')
 
 
+@login_required
 def create_post(request, template="create_post.html"):
-    return render(request, template, {'form': ArticleForm()})
+    if request.method == 'POST':
+        form = ArticleForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.date = date.today()
+            post.is_active = False
+            post.save()
+            return redirect('home')
+    else:
+        form = ArticleForm()
+    return render(request, template, {'form': form})

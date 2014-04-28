@@ -77,6 +77,10 @@ class ArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['text'].widget = CKEditorWidget()
+        self.fields['title'].widget.attrs = {"placeholder": u"Başlık giriniz"}
+        self.fields['description'].widget.attrs = {"placeholder": u"Açıklama giriniz"}
+        self.fields['keywords'].widget.attrs = {"placeholder": u"Anahtar kelimeleri virgülle ayırarak yazınız"}
 
     class Meta:
         model = Post
+        exclude = ('slug', 'date', 'tag', 'category', 'user', 'is_active',)
