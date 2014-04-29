@@ -93,6 +93,28 @@
 
 {% block Content %}
 <div id="index-loop">
+{% if is_editable %}
+	{% for p in posts %}
+		<article class="article">
+			<div class="article-area">
+			 	<h3><a href="/{{p.slug}}">{{ p }}</a></h3>
+				<p class="date"><strong>{{p.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
+			 	<p class="description">{{ p.description }}</p>
+			 	<div class="read-more-btn">
+			 		<a href="/{{p.slug}}">Devamını Oku</a>
+			 	</div>
+		 	</div>
+		 	<div class="article-image">
+	 			<a href="/{{p.slug}}">
+					<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
+					<noscript>
+					<img src="{{MEDIA_URL}}{{ p.image }}" />
+					</noscript>
+	 			</a>
+		 	</div>
+		 </article>
+	{% endfor %}
+{% else %}
 	{% for p in posts %}
 		{% if p.is_active %}
 		<article class="article">
@@ -115,5 +137,6 @@
 		 </article>
 		{% endif %}
 	{% endfor %}
+{% endif %}
 </div>
 {% endblock %}

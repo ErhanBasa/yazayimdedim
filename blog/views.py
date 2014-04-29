@@ -3,6 +3,7 @@ from datetime import date
 from django.contrib import messages
 from django.contrib.auth import login as login_func, authenticate, logout as logout_func
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
@@ -14,7 +15,7 @@ from blog.utils import get_count
 def articles(request, template='index.html'):
     tags = Tag.objects.all().order_by('name')
     categories = Category.objects.all().order_by('name')
-    posts = Post.objects.all().order_by('-date')
+    posts = Post.objects.filter(is_active=True).order_by('-date')
     last_post = posts[0] if posts else None
     if last_post:
         last_post_uri = request.build_absolute_uri(reverse('detail', args=(last_post.slug, )))
@@ -36,7 +37,7 @@ def articles(request, template='index.html'):
 def article(request, slug, template='post.html'):
     categories = Category.objects.all().order_by('name')
     tags = Tag.objects.all().order_by('name')
-    post = get_object_or_404(Post, slug=slug)
+    post = get_object_or_404(Post.objects.filter(Q(is_active=True)|Q(user=request.user)), slug=slug)
     posts = Post.objects.all().exclude(pk=post.pk).order_by('?')[:3]
     category = post.category.all()
     tag = post.tag.all()
@@ -98,7 +99,7 @@ def contact(request, template="contact.html"):
 
 def profile(request, slug, template="profile.html"):
     profile = get_object_or_404(Profile, user__username__iexact=slug)
-    posts = Post.objects.filter(user=profile.user)
+    posts = Post.objects.filter(user=profile.user).order_by("-date")
     is_editable = request.user == profile.user
 
     if request.method == 'POST':

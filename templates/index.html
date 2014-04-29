@@ -33,7 +33,6 @@
 {% block Content %}
 <div id="index-loop">
 	{% for p in posts|slice:"1:" %}
-		{% if p.is_active %}
 		<article class="article">
 		 	<div class="article-image">
 	 			<a href="{{p.slug}}">
@@ -52,7 +51,6 @@
 			 	</div>
 		 	</div>
 		 </article>
-		{% endif %}
 	{% endfor %}
 </div>
 {% endblock %}
