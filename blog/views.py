@@ -3,7 +3,7 @@ from datetime import date
 from django.contrib import messages
 from django.contrib.auth import login as login_func, authenticate, logout as logout_func
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
@@ -37,7 +37,9 @@ def articles(request, template='index.html'):
 def article(request, slug, template='post.html'):
     categories = Category.objects.all().order_by('name')
     tags = Tag.objects.all().order_by('name')
-    post = get_object_or_404(Post.objects.filter(Q(is_active=True)|Q(user=request.user)), slug=slug)
+    post = get_object_or_404(Post, slug=slug)
+    if not post.is_active and post.user != request.user:
+        raise Http404
     posts = Post.objects.all().exclude(pk=post.pk).order_by('?')[:3]
     category = post.category.all()
     tag = post.tag.all()
@@ -174,7 +176,9 @@ def create_post(request, template="create_post.html"):
 
 
 def update_post(request, slug, template="create_post.html"):
-    post = get_object_or_404(Post.objects.filter(user=request.user), slug=slug)
+    post = get_object_or_404(Post, slug=slug)
+    if not post.is_active and post.user != request.user:
+        raise Http404
     if request.method == 'POST':
         form = ArticleForm(instance=post, data=request.POST, files=request.FILES)
         if form.is_valid():
