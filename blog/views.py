@@ -37,13 +37,14 @@ def articles(request, template='index.html'):
 def article(request, slug, template='post.html'):
     categories = Category.objects.all().order_by('name')
     tags = Tag.objects.all().order_by('name')
-    post = get_object_or_404(Post, slug=slug)
+    post = get_object_or_404(Post.objects.select_related('user'), slug=slug)
     if not post.is_active and post.user != request.user:
         raise Http404
     posts = Post.objects.all().exclude(pk=post.pk).order_by('?')[:3]
     category = post.category.all()
     tag = post.tag.all()
     uri = request.build_absolute_uri()
+    is_editable = post.user == request.user
     return render(request, template, {
         'facebook_count': get_count('facebook', uri),
         'twitter_count': get_count('twitter', uri),
@@ -53,6 +54,7 @@ def article(request, slug, template='post.html'):
         'post': post,
         'tags': tags,
         'tag': tag,
+        'is_editable': is_editable,
     })
 
 
@@ -169,21 +171,31 @@ def create_post(request, template="create_post.html"):
             post.date = date.today()
             post.is_active = False
             post.save()
-            return redirect('home')
+            return redirect('detail', post.slug)
     else:
         form = ArticleForm()
     return render(request, template, {'form': form})
 
 
+@login_required
 def update_post(request, slug, template="create_post.html"):
-    post = get_object_or_404(Post, slug=slug)
-    if not post.is_active and post.user != request.user:
+    post = get_object_or_404(Post.objects.select_related('user'), slug=slug)
+    if post.user != request.user:
         raise Http404
     if request.method == 'POST':
         form = ArticleForm(instance=post, data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('detail', post.slug)
     else:
         form = ArticleForm(instance=post)
-    return render(request, template, {'form': form})    
+    return render(request, template, {'form': form, 'is_deletable': True, 'slug': slug})
+
+
+@login_required
+def delete_post(request, slug, template="create_post.html"):
+    post = get_object_or_404(Post.objects.select_related('user'), slug=slug)
+    if post.user != request.user:
+        raise Http404
+    post.delete()
+    return redirect('home')

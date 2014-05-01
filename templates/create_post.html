@@ -45,6 +45,27 @@
 	<label for="id_image" id="imageupload">Resim Yükle</label>
 	<input id="id_image" name="image" type="file">
 	{{ form.text }}
+	{% if is_deletable %}
+	<a class="post-delete">YAZIYI SİL</a>
+	<div class="delete-popup">
+		<div class="delete-cnt">
+			<h4>Siliyorsun ama iyi düşündün mü?</h4>	
+			<p>Bak zor bir karar bu, ben yazıyı silerim ama okurlarının boynunu bükük bırakacaksın. Tabi yinede sil dersen silerim, seni mi kırcam.</p>
+			<div class="buttons">
+				<a href="/bendesileyim/{{slug}}">Evet, eminim sil!</a>
+				<a class="cancel-popup">Ben napıyormuşum, yıkımı durdurun!</a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('.post-delete').on('click',function(){
+			$('.delete-popup').fadeIn();
+		});
+		$('.cancel-popup').on('click',function(){
+			$('.delete-popup').fadeOut();
+		});
+	</script>
+	{% endif %}
 	<button class="read-more">YAYINLA</button>
 </form>
 </div>

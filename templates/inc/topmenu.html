@@ -1,7 +1,7 @@
 <ul id="topmenu">
 {% if user.is_authenticated %}
 	<li class="dd-cnt">
-		<a href="#" class="dd-button">{{user.username}} <i class="down-icon"></i><i class="up-icon"></i></a>
+		<a class="dd-button">{{user.username}} <i class="down-icon"></i><i class="up-icon"></i></a>
 		<ul class="dropdown-menu">
 			<li><a href="/bendeyazayim/">Yazı Ekle</a></li>
 			<li><a href="/yazar/{{user.username}}/">Profilin</a></li>

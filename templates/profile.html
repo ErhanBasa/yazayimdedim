@@ -97,7 +97,10 @@
 	{% for p in posts %}
 		<article class="article">
 			<div class="article-area">
-			 	<h3><a href="/{{p.slug}}">{{ p }}</a></h3>
+			 	<h3>
+			 		<a href="/{{p.slug}}">{{ p.title }}</a>
+			 		<a href="/bendeguncelleyim/{{p.slug}}/"><img src="{{STATIC_URL}}img/text-edit.png"></a>
+			 	</h3>
 				<p class="date"><strong>{{p.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
 			 	<p class="description">{{ p.description }}</p>
 			 	<div class="read-more-btn">
@@ -119,7 +122,7 @@
 		{% if p.is_active %}
 		<article class="article">
 			<div class="article-area">
-			 	<h3><a href="/{{p.slug}}">{{ p }}</a></h3>
+			 	<h3><a href="/{{p.slug}}">{{ p.title }}</a></h3>
 				<p class="date"><strong>{{p.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
 			 	<p class="description">{{ p.description }}</p>
 			 	<div class="read-more-btn">

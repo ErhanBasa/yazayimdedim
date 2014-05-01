@@ -27,7 +27,12 @@
 {% block Cover %}
 {% for p in posts|slice:":1" %}
 <p class="date-user"><strong>{{post.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
-<h2><a>{{post}}</a></h2>
+<h2>
+	<a>{{post.title}}</a>
+	{% if is_editable %}
+	<a href="/bendeguncelleyim/{{post.slug}}/"><img src="{{STATIC_URL}}img/text-edit2.png"></a>
+	{% endif%}
+</h2>
 <p class="description">{{ post.description }}</p>
 
 <div class="share-infos">
@@ -42,6 +47,9 @@
 {% block PageCoverImage %}background-image: url(http://yazayimdedim.com/{{MEDIA_URL}}{{ post.image }}){% endblock %}
 
 {% block Content %}
+{% if not post.is_active %}
+<div class="wait-accept">Yazınız onay sürecindedir! Tamamlanınca size mail vasıtası ile ulaşıcaz efendim.</div>
+{% endif %}
 <div id="main">
 	<article class="article">
 	 	<div class="article-area">
@@ -81,7 +89,7 @@
 	{% for p in posts %}
 		<div class="post-item">
 			<div class="postarea">
-			 	<h3><a href="/{{p.slug}}">{{ p }}</a></h3>
+			 	<h3><a href="/{{p.slug}}">{{ p.title }}</a></h3>
 			 	<p class="description"><a href="/{{p.slug}}">{{ p.description }}</a></p>
 		 	</div>
 		 	<a class="postbg" href="/{{p.slug}}">
