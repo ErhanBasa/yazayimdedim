@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.db.models.signals import post_save
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from ckeditor.fields import RichTextField
+from django.template.loader import render_to_string
 from datetime import datetime
 from autoslug import AutoSlugField
 
@@ -77,3 +81,11 @@ class Profile(models.Model):
     user = models.ForeignKey(User)
     facebook_url = models.CharField(u"Facebook Linki", max_length=100, null=True, blank=True)
     twitter_url = models.CharField(u"Twitter Linki", max_length=100, null=True, blank=True)
+
+
+def contact_handler(sender, instance, signal, *args, **kwargs):
+    # Creates user profile
+    send_mail(u'Yeni iletişim maili', 
+        render_to_string('mails/newmessage.html', {'contact': instance}), 
+        settings.EMAIL_HOST_USER, [settings.MY_MAIL])
+post_save.connect(contact_handler, sender=Contact)
