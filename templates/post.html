@@ -25,8 +25,8 @@
 {% endblock %}
 
 {% block Cover %}
-{% for p in posts|slice:":1" %}
-<p class="date-user"><strong>{{post.date}}</strong> tarihinde <strong><a href="/yazar/{{p.user.username}}/">{{p.user.username}}</a></strong> tarafından yazılmış.</p>
+
+<p class="date-user"><strong>{{post.date}}</strong> tarihinde <strong><a href="/yazar/{{post.user.username}}/">{{post.user.username}}</a></strong> tarafından yazılmış.</p>
 <h2>
 	<a>{{post.title}}</a>
 	{% if is_editable %}
@@ -41,7 +41,7 @@
 </div>
 
 <div class="down-page2"></div>
-{% endfor %}
+
 {% endblock %}
 
 {% block PageCoverImage %}background-image: url(http://yazayimdedim.com/{{MEDIA_URL}}{{ post.image }}){% endblock %}
