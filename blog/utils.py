@@ -4,7 +4,7 @@ import requests
 import json
 
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
 
@@ -26,4 +26,6 @@ def send_mail_with_template(subject=None, mail_to=None, template=None, context={
         mail_to = [mail_to]
 
     body = render_to_string(template, context)
-    send_mail(subject, body, settings.EMAIL_HOST_USER, mail_to)
+    email = EmailMessage(subject, body, settings.EMAIL_HOST_USER, mail_to)
+    email.content_subtype = 'html'
+    return email.send()
