@@ -138,7 +138,7 @@ def login(request, template="login.html"):
                 user.save()
                 profile = Profile.objects.create(user=user)
                 send_mail_with_template(u'Selamlar efendim!', user.email, 
-                        'mails/newmessage.html', {'user': user})
+                        'mails/wellcome.html', {'user': user})
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 login_func(request, user)
                 return redirect('home')
