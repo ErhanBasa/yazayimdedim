@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import date
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login as login_func, authenticate, logout as logout_func
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,7 @@ from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from blog.models import Tag, Category, Post, Profile
 from blog.forms import ContactForm, RegisterationForm, LoginForm as AuthenticationForm, ProfileForm, ArticleForm
-from blog.utils import get_count
+from blog.utils import get_count, send_mail_with_template
 
 
 def articles(request, template='index.html'):
@@ -59,7 +60,7 @@ def article(request, slug, template='post.html'):
 
 
 def sitemap(request, template="sitemap.html"):
-    posts = Post.objects.all().order_by('-date')
+    posts = Post.objects.filter(is_active=True).order_by('-date')
 
     ctx = {
         'posts': posts,
@@ -90,7 +91,9 @@ def contact(request, template="contact.html"):
     if request.method == 'POST':
             form = ContactForm(request.POST)
             if form.is_valid():
-                    form.save()
+                    contact = form.save()
+                    send_mail_with_template(u'Yeni iletişim maili', settings.MY_MAIL, 
+                        'mails/newmessage.html', {'contact': contact})
                     messages.add_message(request, messages.SUCCESS, u'Tamamdır')
                     return redirect('contact')
     else:
@@ -134,6 +137,8 @@ def login(request, template="login.html"):
                 user.email = register_form.cleaned_data.get('email')
                 user.save()
                 profile = Profile.objects.create(user=user)
+                send_mail_with_template(u'Selamlar efendim!', user.email, 
+                        'mails/newmessage.html', {'user': user})
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 login_func(request, user)
                 return redirect('home')
@@ -171,6 +176,8 @@ def create_post(request, template="create_post.html"):
             post.date = date.today()
             post.is_active = False
             post.save()
+            send_mail_with_template(u'Yeni yazı var', settings.MY_MAIL, 
+                        'mails/newpost.html', {'post': post, 'user': request.user})
             return redirect('detail', post.slug)
     else:
         form = ArticleForm()
