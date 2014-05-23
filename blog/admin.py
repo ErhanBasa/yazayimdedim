@@ -8,7 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if change and request.user != obj.user and obj.is_active:
             send_mail_with_template(u'Yazın onaylandı!', obj.user.email,
-                                    'mails/post-accepted.html')
+                                    'mails/post-accepted.html', {'post': obj})
         super(PostAdmin, self).save_model(request, obj, form, change)
 
 
