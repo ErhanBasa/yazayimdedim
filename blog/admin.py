@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from blog.models import Tag, Category, Post, Contact, Profile
+from blog.utils import send_mail_with_template
+
+class PostAdmin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change):
+        if change and request.user != obj.user and obj.is_active:
+            send_mail_with_template(u'Yazın onaylandı!', obj.user.email,
+                                    'mails/post-accepted.html')
+
+
+
 
 
 admin.site.register(Tag)

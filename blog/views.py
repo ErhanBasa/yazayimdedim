@@ -140,6 +140,8 @@ def login(request, template="login.html"):
                 profile = Profile.objects.create(user=user)
                 send_mail_with_template(u'Selamlar efendim!', user.email, 
                         'mails/wellcome.html', {'user': user})
+                send_mail_with_template(u'Yeni üye kaydı!', settings.MY_MAIL,
+                        'mails/wellcome.html', {'user': user})
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 login_func(request, user)
                 return redirect('home')

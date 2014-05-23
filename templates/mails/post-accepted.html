@@ -1,9 +1,9 @@
 <p style="font-family:Arial,sans-serif;">
-Merhaba <b>{{Kullanıcı adı}}</b>,</br>
-efendim yazmış olduğunuz "<b>{{Yazı başlığı}}</b>" başlıklı yazınız yayına girmiştir, yazayım dedim.</br>
+Merhaba <b>{{post.user.username}}</b>,</br>
+efendim yazmış olduğunuz "<b>{{post.title}}</b>" başlıklı yazınız yayına girmiştir, yazayım dedim.</br>
 </br>
 Yazınıza aşağıdaki linkten ulaşabilirsiniz:</br>
-<a href="http://yazayimdedim.com/{{Yazı slugı}}">http://yazayimdedim.com/{{Yazı slugı}}</a></br>
+<a href="http://yazayimdedim.com/{{post.slug}}">http://yazayimdedim.com/{{post.slug}}</a></br>
 </br>
 <b>Yazayım Dedim</b></br>
 <a href="http://yazayimdedim.com/">http://yazayimdedim.com/</a></p>
