@@ -39,8 +39,9 @@ def article(request, slug, template='post.html'):
     categories = Category.objects.all().order_by('name')
     tags = Tag.objects.all().order_by('name')
     post = get_object_or_404(Post.objects.select_related('user'), slug=slug)
-    if not post.is_active and (post.user != request.user or not request.user.is_staff):
-        raise Http404
+    if not post.is_active and post.user != request.user:
+        if not request.user.is_staff:
+            raise Http404
     posts = Post.objects.all().exclude(pk=post.pk).order_by('?')[:3]
     category = post.category.all()
     tag = post.tag.all()
