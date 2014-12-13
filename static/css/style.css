@@ -58,7 +58,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 .icon.facebook 		{background: url(../img/social-media.png) no-repeat -5px -5px; width: 7px; height: 16px;}
 .icon.twitter 		{background: url(../img/social-media.png) no-repeat -18px -6px; width: 16px; height: 13px; margin-top: 2px;}
 
-#cover 		{clear: both; color: #fff; text-align: center; margin-top: 10%; width: 80%; margin: 15% 10% 20px;}
+#cover 		{clear: both; color: #fff; text-align: center; margin-top: 10%; width: 80%; margin: 10% 10% 20px;}
 #cover h2 a 	{font-size: 50px; color: #fff;}
 #cover .description 	{margin-top: 10px; color: #fff; color: rgba(255,255,255,.6); margin-bottom: 10px;}
 #cover .date-user 	{font-size: 13px; color: #fff; color: rgba(255,255,255,.7); margin-bottom: 10px;}
@@ -122,7 +122,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 .lazy-loaded { opacity: 1; }
 
 #otherposts 		{width: 100%; clear: both;}
-#otherposts .post-item 		{position: relative; height: 180px; overflow: hidden; width: 33.33%; float: left;}
+#otherposts .post-item 		{position: relative; height: 200px; overflow: hidden; width: 100%; float: left;margin-bottom: 10px;}
 #otherposts .post-item .postbg 		{width: 100%; display: block;}
 #otherposts .post-item .postbg img 		{width: 100%;}
 #otherposts .post-item .postarea 	{position: absolute; width: 100%; height: 100%; background:  rgba(32,76,0,0.6); color: #fff; text-align: center; padding: 30px 0;}
@@ -172,6 +172,10 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 .delete-popup .delete-cnt .buttons a 	{cursor: pointer; background: #d9534f; color: #fff; padding: 10px; border-radius: 6px; font-size: 18px; font-weight: bold; float: left; margin-left: 20px; margin-bottom: 20px;}
 .delete-popup .delete-cnt .buttons .cancel-popup 	{background: #ccc; margin-left: 10px;}
 
+#left-column 		{width: calc(100% - 340px); float: left;}
+#left-column .article 			{width: 80%; padding: 50px 10%; overflow: hidden;} 
+#sidebar 		{width: 300px; margin: 0 20px; float: right; margin-top: 50px;}
+
 
 
 @-webkit-keyframes downer{
@@ -191,22 +195,23 @@ to {margin-top: 53px;}
 
 #index-loop .article .article-image 	{margin-bottom: 20px;}
 
-#main .article { width: 80%; padding: 50px 10%;}
+#left-column .article { width: 80%; padding: 50px 10%;}
 #otherposts .post-item .postarea 	{padding-top: 0;}
 }
 
+@media (max-width: 768px) {
+	#sidebar 	{width: 80%; padding: 50px 10%;}	
+	#left-column 	{width: 100%;}	
+} 
 @media (max-width: 720px) { 
 	#contact-form ul li.half,
 	#contact-form ul li 	{width: 100%;}
 	#otherposts .post-item 	{width: 100%;}
-#otherposts .post-item .postarea 	{padding-top: 30px;}
 }
 
 @media (max-width: 600px) { 
 	#cover h2 a {font-size: 30px;}
 	#cover .description 	{font-size: 20px;}
-	#otherposts .post-item 	{width: 100%;}
-	#otherposts .post-item p a { font-size: 14px;}
 	.share-btn 	{width: 100%; margin-bottom: 0;}
 	.share-btn.twitter 	{margin-left: 0;}
 

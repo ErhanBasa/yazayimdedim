@@ -50,6 +50,39 @@
 {% if not post.is_active %}
 <div class="wait-accept">Yazınız onay sürecindedir! Tamamlanınca size mail vasıtası ile ulaşıcaz efendim.</div>
 {% endif %}
+
+<div id="sidebar">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Dikey -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6954889843327605"
+     data-ad-slot="7695087201"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div id="otherposts">
+	{% for p in posts %}
+		<div class="post-item">
+			<div class="postarea">
+			 	<h3><a href="/{{p.slug}}">{{ p.title }}</a></h3>
+			 	<p class="description"><a href="/{{p.slug}}">{{ p.description }}</a></p>
+		 	</div>
+		 	<a class="postbg" href="/{{p.slug}}">
+				<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
+				<noscript>
+				<img src="{{MEDIA_URL}}{{ p.image }}" />
+				</noscript>
+		 	</a>
+	 	</div>
+	{% endfor %}
+</div>
+
+</div>
+<div id="left-column">
+
 <div id="main">
 	<article class="article">
 	 	<div class="article-area">
@@ -85,21 +118,6 @@
 	    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
 
-<div id="otherposts">
-	{% for p in posts %}
-		<div class="post-item">
-			<div class="postarea">
-			 	<h3><a href="/{{p.slug}}">{{ p.title }}</a></h3>
-			 	<p class="description"><a href="/{{p.slug}}">{{ p.description }}</a></p>
-		 	</div>
-		 	<a class="postbg" href="/{{p.slug}}">
-				<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
-				<noscript>
-				<img src="{{MEDIA_URL}}{{ p.image }}" />
-				</noscript>
-		 	</a>
-	 	</div>
-	{% endfor %}
 </div>
 
 {% endblock %}
