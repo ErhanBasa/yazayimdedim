@@ -66,16 +66,16 @@
 <div id="otherposts">
 	{% for p in posts %}
 		<div class="post-item">
-			<div class="postarea">
-			 	<h3><a href="/{{p.slug}}">{{ p.title }}</a></h3>
-			 	<p class="description"><a href="/{{p.slug}}">{{ p.description }}</a></p>
-		 	</div>
 		 	<a class="postbg" href="/{{p.slug}}">
 				<img class="lazy-load" data-src="{{MEDIA_URL}}{{ p.image }}" data-src-mobile="{{MEDIA_URL}}{{ p.image }}" src="{{STATIC_URL}}img/no-image.jpg" />
 				<noscript>
 				<img src="{{MEDIA_URL}}{{ p.image }}" />
 				</noscript>
 		 	</a>
+			<div class="postarea">
+			 	<h3><a href="/{{p.slug}}">{{ p.title }}</a></h3>
+			 	<p class="description"><a href="/{{p.slug}}">{{ p.description }}</a></p>
+		 	</div>
 	 	</div>
 	{% endfor %}
 </div>
