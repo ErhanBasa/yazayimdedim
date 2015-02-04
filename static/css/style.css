@@ -196,13 +196,13 @@ to {margin-top: 53px;}
 
 #index-loop .article .article-image 	{margin-bottom: 20px;}
 
-#left-column .article { width: 80%; padding: 50px 10%;}
+#post-left-column .article { width: 80%; padding: 50px 10%;}
 #otherposts .post-item .postarea 	{padding-top: 0;}
 }
 
 @media (max-width: 768px) {
 	#sidebar 	{width: 80%; padding: 50px 10%;}	
-	#left-column 	{width: 100%;}	
+	#post-left-column 	{width: 100%;}	
 	#index-loop {width: 80%}
 } 
 @media (max-width: 720px) { 
