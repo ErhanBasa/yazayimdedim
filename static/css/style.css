@@ -172,9 +172,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 .delete-popup .delete-cnt .buttons a 	{cursor: pointer; background: #d9534f; color: #fff; padding: 10px; border-radius: 6px; font-size: 18px; font-weight: bold; float: left; margin-left: 20px; margin-bottom: 20px;}
 .delete-popup .delete-cnt .buttons .cancel-popup 	{background: #ccc; margin-left: 10px;}
 
-#index-loop 		{width: calc(100% - 240px); float: left;}
-#main 		{width: calc(100% - 340px); float: left;}
-#left-column #main  		{background: #fff;}
+#left-column 		{width: calc(100% - 340px); float: left;}
 #left-column .article 			{width: 80%; padding: 50px 10%; overflow: hidden;} 
 #sidebar 		{width: 300px; margin: 0 20px; float: right; margin-top: 50px;}
 
@@ -203,8 +201,7 @@ to {margin-top: 53px;}
 
 @media (max-width: 768px) {
 	#sidebar 	{width: 80%; padding: 50px 10%;}	
-	#main 			{width: 80%;}
-	#index-loop 	{width: 80%;}	
+	#left-column 	{width: 100%;}	
 } 
 @media (max-width: 720px) { 
 	#contact-form ul li.half,
