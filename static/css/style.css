@@ -71,6 +71,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 #cover .share-infos a:hover 	{color: rgba(255,255,255,1);}
 #cover .share-infos i 	{}
 
+#index-loop 	{width: calc(100% - 240px);}
 #index-loop .article 		{padding: 50px 10%; background: url(../img/post-sep.png) repeat-x bottom left; overflow: hidden;}
 #index-loop .article .article-area 		{width: 55%; padding-right: 5%; float: left;}
 #index-loop .article .date 				{color: #777; font-size: 14px; margin: 10px 0;}
@@ -93,7 +94,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 
 .originalprofile 		{display: block;}
 
-#main .article 			{width: 60%; padding: 50px 20%; overflow: hidden;} 
+#main .article 			{width: 60%; padding: 50px 20%; overflow: hidden; background: #fff;} 
 #main .article p 		{margin: 20px 0; font-size: 20px; line-height: 30px;} 
 #main .article img 		{height: auto!important;}
 #post-bottom 			{width: 60%; margin: 20px auto; background: #fff; padding: 25px; border-radius: 5px; border: 1px solid #dfdfdf;}
