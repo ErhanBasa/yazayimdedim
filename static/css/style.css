@@ -172,7 +172,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 .delete-popup .delete-cnt .buttons a 	{cursor: pointer; background: #d9534f; color: #fff; padding: 10px; border-radius: 6px; font-size: 18px; font-weight: bold; float: left; margin-left: 20px; margin-bottom: 20px;}
 .delete-popup .delete-cnt .buttons .cancel-popup 	{background: #ccc; margin-left: 10px;}
 
-#left-column 		{width: calc(100% - 340px); float: left;}
+#index-loop 		{width: calc(100% - 240px); float: left;}
 #left-column #main  		{background: #fff;}
 #left-column .article 			{width: 80%; padding: 50px 10%; overflow: hidden;} 
 #sidebar 		{width: 300px; margin: 0 20px; float: right; margin-top: 50px;}
