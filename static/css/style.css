@@ -202,7 +202,7 @@ to {margin-top: 53px;}
 
 @media (max-width: 768px) {
 	#sidebar 	{width: 80%; padding: 50px 10%;}	
-	#index-loop 	{width: 100%;}	
+	#index-loop 	{width: 80%;}	
 } 
 @media (max-width: 720px) { 
 	#contact-form ul li.half,
