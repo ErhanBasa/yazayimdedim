@@ -173,6 +173,7 @@ body {font-size: 22px; color: #444444; font-family: 'fontnormal'; background: #e
 .delete-popup .delete-cnt .buttons .cancel-popup 	{background: #ccc; margin-left: 10px;}
 
 #left-column 		{width: calc(100% - 340px); float: left;}
+#left-column #main  		{background: #fff;}
 #left-column .article 			{width: 80%; padding: 50px 10%; overflow: hidden;} 
 #sidebar 		{width: 300px; margin: 0 20px; float: right; margin-top: 50px;}
 
